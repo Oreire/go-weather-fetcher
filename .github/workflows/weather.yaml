@@ -1,9 +1,10 @@
 name: Fetch Global Weather
 
 on:
+  push:                     # Trigger on any push to the repository
   schedule:
-    - cron: '0 * * * *'  # Runs every hour
-  workflow_dispatch:      # Allows manual trigger
+    - cron: '0 * * * *'     # Runs every hour
+  workflow_dispatch:        # Allows manual trigger
 
 jobs:
   fetch-weather:
@@ -23,4 +24,5 @@ jobs:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
       run: go run weather.go
       working-directory: ./weather
+
 
