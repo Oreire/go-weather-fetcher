@@ -22,7 +22,7 @@ jobs:
     - name: Run weather fetch script
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-      run: go run weather.go
+      run: go run city.go
       working-directory: ./weather
 
 
