@@ -1,10 +1,37 @@
-# go-prog
-Overview and Application of Golang Programming Language 
+# 🌍 Operational Meteorology in CI/CD  
+**A GitHub Actions Workflow for Real-Time Weather Intelligence**  
+Bridges meteorological data with continuous integration and deployment pipelines.
+
+This project, **Global Weather Fetcher** implements a modular Go-based automation pipeline that retrieves real-time weather data across global cities, formats it for human readability, and logs results in timestamped `.txt` and `.json` files. Integrated with GitHub Actions, it supports scheduled execution, CI validation, and artifact retention—demonstrating fluency in cloud-native tooling, DevOps automation, and systems-informed design.
 
 
+### 🔧 Role & Responsibilities
+- Architected a resilient CLI tool in Go to interface with OpenWeatherMap API
+- Implemented structured logging and timezone-aware formatting
+- Built a CI/CD pipeline using GitHub Actions with cron scheduling and artifact uploads
+- Designed fault-tolerant error handling for API failures and malformed responses
+
+### 🧠 Technical Highlights
+ ______________________________________________________________________________________________________________
+| Capability                     | Description                                                                 |
+|-------------------------------|----------------------------------------------------------------------------- |
+| 🌐 Multi-City Coverage         | Fetches weather for London, Tokyo, Lagos, Sydney, and more                 |
+| 📦 Timestamped Logging         | Saves logs in `logs/weather_log_<timestamp>.txt` and `.json`               |
+| 🔁 GitHub Actions Integration  | CI/CD pipeline with push, schedule, and manual triggers                    |
+| 🧪 API Resilience              | Handles 400/401 errors and unsupported city formats gracefully             |
+| 🌅 Timezone-Aware Conversion   | Converts sunrise/sunset from UTC to local time using API-provided offsets |
+| 📁 Artifact Management         | Logs retained as downloadable artifacts for audit and analysis             |
 
 
-Output
+### 📈 Impact & Extensibility
+
+- Enables lightweight observability across deployment zones
+- Reduces manual overhead in environmental data collection
+- Easily extendable to include forecasts, alerts, or dashboard integrations
+- Demonstrates strategic alignment with DevOps, automation, and transformation goals
+
+
+Artefactory Output:
 
 https://github.com/Oreire/go-prog/actions/runs/17631236409/artifacts/3981369294
 
