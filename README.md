@@ -1,4 +1,5 @@
 # 🌍 Operational Meteorology in CI/CD  
+
 **A GitHub Actions Workflow for Real-Time Weather Intelligence**  
  Bridges meteorological data with continuous integration and deployment pipelines.
 
@@ -8,6 +9,7 @@ This project, **Global Weather Fetcher** implements a modular Go-based automatio
 **Tech Stack:** Go (Golang), GitHub Actions, OpenWeatherMap API, JSON, Cron, CI/CD
 
 **Focus Areas:** Automation, Observability, Artifact Management, Resilience Engineering
+
 
 💡 **Problem Statement**
 
@@ -30,15 +32,18 @@ In DevOps environments, real-time environmental data can inform deployment strat
 
 
 ### 🧠 Key Features
- ______________________________________________________________________________________________________________
-| **Capability**                 | **Description**                                                            |
-|------------------------------------------------------------------------------------------------------------ |
-| 🌐 Multi-City Coverage         | Fetches weather for London, Tokyo, Lagos, Sydney, and more                 |
-| 📦 Timestamped Logging         | Saves logs in `logs/weather_log_<timestamp>.txt` and `.json`               |
-| 🔁 GitHub Actions Integration  | CI/CD pipeline with push, schedule, and manual triggers                    |
-| 🧪 API Resilience              | Handles 400/401 errors and unsupported city formats gracefully             |
-| 🌅 Timezone-Aware Conversion   | Converts sunrise/sunset from UTC to local time using API-provided offsets  |
-| 📁 Artifact Management         | Logs retained as downloadable artifacts for audit and analysis             |
+
+1. **Multi-City Coverage:** Fetches weather for London, Tokyo, Lagos, Sydney, and more 
+
+2. **Timestamped Logging:** Saves logs in `logs/weather_log_<timestamp>.txt` and `.json`    
+
+3. **GitHub Actions Integration:** CI/CD pipeline with push, schedule, and manual triggers   
+
+4. **API Resilience:** Handles 400/401 errors and unsupported city formats gracefully    
+
+5. **Timezone-Aware Conversion:** Converts sunrise/sunset from UTC to local time using API-provided offsets 
+
+6. **Artifact Management:** Logs retained as downloadable artifacts for audit and analysis             
 
 
 ### 📈 Impact & Extensibility
