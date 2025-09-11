@@ -71,7 +71,7 @@ func main() {
 		return
 	}
 
-	cities := []string{"London", "Tokyo", "New York", "Lagos", "Sydney"}
+	cities := []string{"London", "Austria", "Tokyo", "New York", "Lagos", "Sydney"}
 
 	for _, city := range cities {
 		getWeather(city, apiKey)
