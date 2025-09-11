@@ -22,4 +22,5 @@ jobs:
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
       run: go run weather.go
+      working-directory: ./weather
 
