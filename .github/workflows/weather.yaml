@@ -29,7 +29,7 @@ jobs:
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
       run: |
-        nohup go run weather.go &
+        nohup go run city.go &
         sleep 5  # Give server time to start
         curl -s "http://localhost:8080/weather?city=London" > response.html
         grep "London" response.html
