@@ -1,10 +1,39 @@
+# name: Fetch Global Weather
+
+# on:
+#   push:                     # Trigger on any push to the repository
+#   schedule:
+#     - cron: '0 * * * *'     # Runs every hour
+#   workflow_dispatch:        # Allows manual trigger
+
+# jobs:
+#   fetch-weather:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
+
+#     - name: Set up Go
+#       uses: actions/setup-go@v4
+#       with:
+#         go-version: '1.21'
+
+#     - name: Run weather fetch script
+#       env:
+#         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+#       run: go run city.go
+#       working-directory: ./weather
+
+
 name: Fetch Global Weather
 
 on:
-  push:                     # Trigger on any push to the repository
+  push:
+    branches: [main]
   schedule:
     - cron: '0 * * * *'     # Runs every hour
-  workflow_dispatch:        # Allows manual trigger
+  workflow_dispatch:
 
 jobs:
   fetch-weather:
@@ -19,10 +48,19 @@ jobs:
       with:
         go-version: '1.21'
 
+    - name: Install dependencies
+      run: go mod tidy
+      working-directory: ./weather
+
     - name: Run weather fetch script
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
       run: go run city.go
       working-directory: ./weather
 
+    - name: Upload weather logs
+      uses: actions/upload-artifact@v3
+      with:
+        name: weather-logs
+        path: ./weather/logs/
 
