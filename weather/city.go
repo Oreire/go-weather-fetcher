@@ -33,65 +33,47 @@ type WeatherResponse struct {
 	} `json:"sys"`
 }
 
-func getWeather(city string, apiKey string) (*WeatherResponse, error) {
+func getWeather(city string, apiKey string) {
 	url := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric", city, apiKey)
 	resp, err := http.Get(url)
 	if err != nil {
-		return nil, err
+		fmt.Printf("❌ Error fetching weather for %s: %v\n", city, err)
+		return
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API error: %s", resp.Status)
+		fmt.Printf("⚠️ API error for %s: %s\n", city, resp.Status)
+		return
 	}
 
 	var weather WeatherResponse
 	if err := json.NewDecoder(resp.Body).Decode(&weather); err != nil {
-		return nil, err
-	}
-	return &weather, nil
-}
-
-func weatherHandler(w http.ResponseWriter, r *http.Request) {
-	apiKey := os.Getenv("OPENWEATHER_API_KEY")
-	city := r.URL.Query().Get("city")
-	if city == "" {
-		http.Error(w, "Missing 'city' parameter", http.StatusBadRequest)
+		fmt.Printf("🛑 Decode error for %s: %v\n", city, err)
 		return
 	}
 
-	weather, err := getWeather(city, apiKey)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	response := fmt.Sprintf(`
-		<h2>📍 %s, %s</h2>
-		<p>🌤️ Condition: %s (%s)</p>
-		<p>🌡️ Temperature: %.2f°C (Feels like %.2f°C)</p>
-		<p>📉 Min/Max: %.2f°C / %.2f°C</p>
-		<p>💧 Humidity: %d%% | Pressure: %dhPa</p>
-		<p>🌬️ Wind: %.2fm/s from %d°</p>
-		<p>🌅 Sunrise: %s | 🌇 Sunset: %s</p>
-	`,
-		weather.Name, weather.Sys.Country,
-		weather.Weather[0].Main, weather.Weather[0].Description,
-		weather.Main.Temp, weather.Main.FeelsLike,
-		weather.Main.TempMin, weather.Main.TempMax,
-		weather.Main.Humidity, weather.Main.Pressure,
-		weather.Wind.Speed, weather.Wind.Deg,
+	fmt.Printf("\n📍 %s, %s\n", weather.Name, weather.Sys.Country)
+	fmt.Printf("🌤️ Condition: %s (%s)\n", weather.Weather[0].Main, weather.Weather[0].Description)
+	fmt.Printf("🌡️ Temperature: %.2f°C (Feels like %.2f°C)\n", weather.Main.Temp, weather.Main.FeelsLike)
+	fmt.Printf("📉 Min/Max: %.2f°C / %.2f°C\n", weather.Main.TempMin, weather.Main.TempMax)
+	fmt.Printf("💧 Humidity: %d%% | Pressure: %dhPa\n", weather.Main.Humidity, weather.Main.Pressure)
+	fmt.Printf("🌬️ Wind: %.2fm/s from %d°\n", weather.Wind.Speed, weather.Wind.Deg)
+	fmt.Printf("🌅 Sunrise: %s | 🌇 Sunset: %s\n",
 		time.Unix(weather.Sys.Sunrise, 0).Format("15:04"),
-		time.Unix(weather.Sys.Sunset, 0).Format("15:04"),
-	)
-
-	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprint(w, response)
+		time.Unix(weather.Sys.Sunset, 0).Format("15:04"))
 }
 
 func main() {
-	http.HandleFunc("/weather", weatherHandler)
-	fmt.Println("🌍 Server running at http://localhost:8080/weather?city=London")
-	http.ListenAndServe(":8080", nil)
-}
+	apiKey := os.Getenv("OPENWEATHER_API_KEY")
+	if apiKey == "" {
+		fmt.Println("❗ OPENWEATHER_API_KEY environment variable not set.")
+		return
+	}
 
+	cities := []string{"London", "Tokyo", "New York", "Lagos", "Sydney"}
+
+	for _, city := range cities {
+		getWeather(city, apiKey)
+	}
+}

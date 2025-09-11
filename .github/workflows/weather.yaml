@@ -19,19 +19,10 @@ jobs:
       with:
         go-version: '1.21'
 
-    - name: Run CLI weather fetch script
+    - name: Run weather fetch script
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
       run: go run city.go
       working-directory: ./weather
 
-    - name: Test weather web server
-      env:
-        OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-      run: |
-        nohup go run city.go &
-        sleep 5  # Give server time to start
-        curl -s "http://localhost:8080/weather?city=London" > response.html
-        grep "London" response.html
-      working-directory: ./weather
 
