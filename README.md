@@ -107,7 +107,7 @@ https://github.com/Oreire/go-prog/actions/runs/17631236409/artifacts/3981369294
 
 ### 🔮 Next Steps
 
-These next steps signal a strategic evolution of your weather-fetching pipeline from a standalone automation tool into a **production-grade observability and deployment system**. The following are the envisioned implications within a DevOps context:
+These next steps signal a strategic evolution of the weather-fetching pipeline from a standalone automation tool into a **production-grade observability and deployment system**. The following are the envisioned implications within a DevOps context:
 
 
 ### 📣 Integrate Slack/Email Alerting for Threshold-Based Weather Events
